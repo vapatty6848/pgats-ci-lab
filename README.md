@@ -30,13 +30,18 @@
     yarn playwright install
     ```
 12. Execute os testes end-to-end com o Playwright
-    ```shell
+    `shell
     yarn run e2e
-    ```
+    `
+    12.a Mostra relatório playwright
+    `shell
+      yarn playwright show-report
+    `
 13. Execute a aplicação com `yarn start`
 14. Acesse a aplicação publicada [neste link](https://pgats-ci-example.netlify.app)
 
 ---
 
 💜⚡️
+
 # pgats-ci-lab
