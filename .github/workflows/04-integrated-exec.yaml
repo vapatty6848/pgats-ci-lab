@@ -1,0 +1,101 @@
+# CI de Nivel 04 - Disparo de  testes dentro do pipe do dev
+
+# nome do nosso 'pipeline'
+name: 'Execução Integrada'
+
+# regras de disparo (gatilho/triggers)
+# gatilho de exec manual = workflow_dispatch
+on:
+  workflow_dispatch:
+
+# trabalhos/tarefas dentro do pipeline = jobs
+jobs:
+   inspecao:
+  # nome da nossa tarefa
+
+    runs-on: ubuntu-latest
+      # maquina que iremos executar nossa tarefa
+
+      # passos do script de build
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v2
+
+     # instalação do yarn
+      - name: Instalando yarn
+        run:  npm install -g yarn
+
+      # instalando dependências
+      - name: Instalando dependências
+        run: yarn
+
+     # usando lint
+      - name: Padronizando o codigo
+        run: yarn lint
+
+unidade:
+  # nome da nossa tarefa
+    runs-on: ubuntu-latest
+      # maquina que iremos executar nossa tarefa
+
+      # passos do script de build
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v2
+
+     # instalação do yarn
+      - name: Instalando yarn
+        run:  npm install -g yarn
+
+      # instalando dependências
+      - name: Instalando dependências
+        run: yarn
+
+      # executando testes
+      - name: Executando testes de unidade
+        run: yarn test
+
+e2e-tests:
+  # nome da nossa tarefa
+
+    runs-on: ubuntu-latest
+      # maquina que iremos executar nossa tarefa
+
+      # passos do script de build
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v2
+
+      # instalação do node
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 22.x
+     # instalação do yarn
+      - name: Instalando yarn
+        run:  npm install -g yarn
+
+      # instalando dependências
+      - name: Instalando dependências
+        run: yarn
+
+      # instalando Playwritght
+      - name: Instalando Playwright
+        run: yarn  playwright install
+
+      # executando os testes
+      - name: Executando os testes E2E
+        run: yarn run e2e
+
+      # recurso subir temporariamente arquivo especialmente de relatorio
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: report
+          path: ./playwright-report
+
+deploy:
+     runs-on: ubuntu-latest
+
+     steps:
+        - name: Simulando um deploy
+          run: echo "Simulando um deploy com sucesso"
