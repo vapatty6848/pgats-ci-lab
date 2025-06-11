@@ -19,6 +19,8 @@ jobs:
   e2e-tests:
   # nome da nossa tarefa
 
+    if: $ {{  github.event.workflow_run.conclusion === 'success' }}
+
     runs-on: ubuntu-latest
       # maquina que iremos executar nossa tarefa
 
