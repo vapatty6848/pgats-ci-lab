@@ -10,8 +10,8 @@ on:
 
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
-   inspecao:
-  # nome da nossa tarefa
+  inspecao:
+    # nome da nossa tarefa
 
     runs-on: ubuntu-latest
       # maquina que iremos executar nossa tarefa
@@ -33,67 +33,69 @@ jobs:
       - name: Padronizando o codigo
         run: yarn lint
 
-unidade:
-  # nome da nossa tarefa
-    runs-on: ubuntu-latest
-      # maquina que iremos executar nossa tarefa
 
-      # passos do script de build
-    steps:
-      # clone do projeto
-      - uses: actions/checkout@v2
+  unidade:
+    # nome da nossa tarefa
+      runs-on: ubuntu-latest
+        # maquina que iremos executar nossa tarefa
 
-     # instalação do yarn
-      - name: Instalando yarn
-        run:  npm install -g yarn
+        # passos do script de build
+      steps:
+        # clone do projeto
+        - uses: actions/checkout@v2
 
-      # instalando dependências
-      - name: Instalando dependências
-        run: yarn
+       # instalação do yarn
+        - name: Instalando yarn
+          run:  npm install -g yarn
 
-      # executando testes
-      - name: Executando testes de unidade
-        run: yarn test
+        # instalando dependências
+        - name: Instalando dependências
+          run: yarn
 
-e2e-tests:
-  # nome da nossa tarefa
+        # executando testes
+        - name: Executando testes de unidade
+          run: yarn test
 
-    runs-on: ubuntu-latest
-      # maquina que iremos executar nossa tarefa
+  e2e-tests:
+    # nome da nossa tarefa
 
-      # passos do script de build
-    steps:
-      # clone do projeto
-      - uses: actions/checkout@v2
+      runs-on: ubuntu-latest
+        # maquina que iremos executar nossa tarefa
 
-      # instalação do node
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 22.x
-     # instalação do yarn
-      - name: Instalando yarn
-        run:  npm install -g yarn
+        # passos do script de build
+      steps:
+        # clone do projeto
+        - uses: actions/checkout@v2
 
-      # instalando dependências
-      - name: Instalando dependências
-        run: yarn
+        # instalação do node
+        - uses: actions/setup-node@v2
+          with:
+            node-version: 22.x
+       # instalação do yarn
+        - name: Instalando yarn
+          run:  npm install -g yarn
 
-      # instalando Playwritght
-      - name: Instalando Playwright
-        run: yarn  playwright install
+        # instalando dependências
+        - name: Instalando dependências
+          run: yarn
 
-      # executando os testes
-      - name: Executando os testes E2E
-        run: yarn run e2e
+        # instalando Playwritght
+        - name: Instalando Playwright
+          run: yarn  playwright install
 
-      # recurso subir temporariamente arquivo especialmente de relatorio
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: report
-          path: ./playwright-report
+        # executando os testes
+        - name: Executando os testes E2E
+          run: yarn run e2e
 
-deploy:
+        # recurso subir temporariamente arquivo especialmente de relatorio
+        - uses: actions/upload-artifact@v4
+          if: ${{ !cancelled() }}
+          with:
+            name: report
+            path: ./playwright-report
+
+  deploy:
+    # nome da nossa tarefa
      runs-on: ubuntu-latest
 
      steps:
