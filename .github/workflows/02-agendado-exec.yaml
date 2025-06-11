@@ -3,7 +3,7 @@
 # nome do nosso 'pipeline'
 name: 'Execução Agendada'
 
-# regras de disparo (gatilho/triggers)
+# regras de disparo (gatilho/triggers) agendado
 
 on:
    schedule:
