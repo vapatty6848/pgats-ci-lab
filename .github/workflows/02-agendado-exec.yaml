@@ -1,0 +1,51 @@
+# CI de Nivel 02- Disparo de um pipeline a partir de um agendamento
+
+# nome do nosso 'pipeline'
+name: 'Execução Agendada'
+
+# regras de disparo (gatilho/triggers)
+
+on:
+   scheduled:
+    - cron: '0 6 * * 1'
+      # cron = 0 6 * * 1 = 06:00:00 toda segunda feira
+      # 0 =  minutos
+      # 6 =  hora
+      # * =  dia do mês
+      # * =  mes
+      # 1 =  dia da semana
+
+
+# trabalhos/tarefas dentro do pipeline = jobs
+jobs:
+
+  e2e-tests:
+  # nome da nossa tarefa
+
+    runs-on: ubuntu-latest
+      # maquina que iremos executar nossa tarefa
+
+      # passos do script de build
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v2
+
+      # instalação do node
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 22.x
+     # instalação do yarn
+      - name: Instalando yarn
+        run:  npm install -g yarn
+
+      # instalando dependências
+      - name: Instalando dependências
+        run: yarn
+
+      # instalando Playwritght
+      - name: Instalando Playwright
+        run: yarn  playwright install
+
+      # executando os testes
+      - name: Executando os testes E2E
+        run: yarn run e2e
