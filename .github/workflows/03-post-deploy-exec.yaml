@@ -48,3 +48,10 @@ jobs:
       # executando os testes
       - name: Executando os testes E2E
         run: yarn run e2e
+
+      # recurso subir temporariamente arquivo especialmente de relatorio
+      - uses: actions/upload_artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: report
+          path: ./playwright-report
