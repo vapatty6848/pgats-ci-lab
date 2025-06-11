@@ -7,12 +7,12 @@ name: 'Execução por Deploy'
 # gatilho de exec a partir de outro pipe = workflow_run
 on:
   workflow_run:
-    workflows: ['Execução Manual']
+    workflows: ['Execução Por Deploy']
     # nome da pipeline que voce  vai monitorar
     types:
       - completed
       # as types podem ser tbem in_progress, requested
-      
+
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
 
