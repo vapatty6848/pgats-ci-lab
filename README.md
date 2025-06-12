@@ -36,6 +36,7 @@
 13. Execute a aplicação com `yarn start`
 14. Acesse a aplicação publicada [neste link](https://pgats-ci-example.netlify.app)
 
+15. Formatar arquivos `yarn lint:format`  -  `npx prettier . --write `
 ---
 
 💜⚡️
