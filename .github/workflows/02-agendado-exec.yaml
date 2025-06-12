@@ -6,7 +6,7 @@ name: 'Execução Agendada'
 # regras de disparo (gatilho/triggers) agendado
 
 on:
-   schedule:
+  schedule:
     - cron: '0 6 * * 1'
       # cron = 0 6 * * 1 = 06:00:00 toda segunda feira
       # 0 =  minutos
@@ -15,14 +15,13 @@ on:
       # * =  mes
       # 1 =  dia da semana
 
-
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
-
   e2e-tests:
-  # nome da nossa tarefa
+    # nome da nossa tarefa
 
-    runs-on: ubuntu-latest
+    runs-on:
+      ubuntu-latest
       # maquina que iremos executar nossa tarefa
 
       # passos do script de build
@@ -34,9 +33,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 22.x
-     # instalação do yarn
+      # instalação do yarn
       - name: Instalando yarn
-        run:  npm install -g yarn
+        run: npm install -g yarn
 
       # instalando dependências
       - name: Instalando dependências

@@ -15,13 +15,13 @@ on:
 
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
-
   e2e-tests:
-  # nome da nossa tarefa
+    # nome da nossa tarefa
 
     if: ${{  github.event.workflow_run.conclusion == 'success' }}
 
-    runs-on: ubuntu-latest
+    runs-on:
+      ubuntu-latest
       # maquina que iremos executar nossa tarefa
 
       # passos do script de build
@@ -33,9 +33,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 22.x
-     # instalação do yarn
+      # instalação do yarn
       - name: Instalando yarn
-        run:  npm install -g yarn
+        run: npm install -g yarn
 
       # instalando dependências
       - name: Instalando dependências
