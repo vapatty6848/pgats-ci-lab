@@ -39,7 +39,7 @@ jobs:
     runs-on:
       ubuntu-latest
       # maquina que iremos executar nossa tarefa
-    needs: [inpecao]
+    needs: [inspecao]
       # passos do script de build
     steps:
       # clone do projeto
@@ -63,7 +63,7 @@ jobs:
     runs-on:
       ubuntu-latest
       # maquina que iremos executar nossa tarefa
-    needs: [inpecao]
+    needs: [inspecao]
       # passos do script de build
     steps:
       # clone do projeto
